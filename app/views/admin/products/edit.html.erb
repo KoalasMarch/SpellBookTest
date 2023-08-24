@@ -1,10 +1,10 @@
-<h1>Editing product</h1>
+<div class="container max-width">
+  <div class="grid grid-cols-2 mb-4">
+    <div class="text-2xl font-bold">Edit Products</div>
+  </div>
 
-<%= render "form", product: @product %>
-
-<br>
-
-<div>
-  <%= link_to "Show this product", @product %> |
-  <%= link_to "Back to products", admin_products_path %>
+  <div class="block max-w p-6 bg-white border border-gray-200 rounded-lg shadow-md mb-4">
+    <%= render "form", product: @product %>
+  </div>
 </div>
+
