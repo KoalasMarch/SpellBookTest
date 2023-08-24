@@ -1,20 +1,26 @@
 class Api::ProductsController < Api::ApplicationController
+  before_asction :set_product, only: [:show, :edit, :update, :destroy]
   # GET /products or /products.json
   def index
     @products = Product.all
+
+    render json: { success: true, products: @products.map(:as_json)}
   end
 
   # GET /products/1 or /products/1.json
   def show
+    render json: { success: true, product: @product.as_json}
   end
 
   # GET /products/new
   def new
     @product = Product.new
+    render json: { success: true, product: @product.as_json}
   end
 
   # GET /products/1/edit
   def edit
+    render json: { success: true, product: @product.as_json}
   end
 
   # POST /products or /products.json
@@ -23,9 +29,9 @@ class Api::ProductsController < Api::ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.json { render :show, status: :created, location: @product }
+        render json: { success: true, product: @product.as_json}
       else
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        render json: { errors: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -34,9 +40,9 @@ class Api::ProductsController < Api::ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.json { render :show, status: :ok, location: @product }
+        render json: { success: true, product: @product.as_json}
       else
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        render json: { errors: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,7 +52,7 @@ class Api::ProductsController < Api::ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.json { head :no_content }
+      render json: { success: true }
     end
   end
 

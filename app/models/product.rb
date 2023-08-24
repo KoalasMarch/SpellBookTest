@@ -11,4 +11,12 @@
 #  updated_at     :datetime         not null
 #
 class Product < ApplicationRecord
+  def as_json
+    { 
+      name: name, 
+      description: description, 
+      price_currency: price_currency, 
+      price_subunit: price_subunit
+    }
+  end
 end
