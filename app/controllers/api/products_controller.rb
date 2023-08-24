@@ -1,10 +1,10 @@
 class Api::ProductsController < Api::ApplicationController
-  before_asction :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   # GET /products or /products.json
   def index
     @products = Product.all
 
-    render json: { success: true, products: @products.map(:as_json)}
+    render json: { success: true, products: @products.map(&:as_json)}
   end
 
   # GET /products/1 or /products/1.json
